@@ -1,4 +1,4 @@
-# Mailbox Notifier
+# Smart Mailbox Notifier (IoT)
 
 An ultra-low power IoT device built with ESP32-C3 and C++ (ESP-IDF with Arduino component) that notifies users via email when physical mail arrives in their mailbox.
 
@@ -6,20 +6,24 @@ An ultra-low power IoT device built with ESP32-C3 and C++ (ESP-IDF with Arduino 
 
 This project is a hardware and software solution designed to detect the presence of physical mail and send email notifications. It uses a Time-of-Flight laser sensor to measure the distance inside the mailbox and verify if there's new letter. 
 
-To maximize battery life, the system implements **Ultra-Low Power** techniques. Instead of relying on the microcontroller's standard deep sleep, the project uses an external M5Stamp Timer Power module to perform **Power Latching**. The ESP32 remains completely disconnected from power until awoken by a physical interrupt (opening the mailbox flap via a reed switch) or a scheduled RTC alarm. 
+To maximize battery life, the system implements **Extreme Ultra-Low Power** techniques. Instead of relying on the microcontroller's standard deep sleep, the project uses an external M5Stamp Timer Power module to perform **Power Latching**. The ESP32 remains completely disconnected from power until awoken by a physical interrupt (opening the mailbox flap via a reed switch) or a scheduled RTC alarm. 
 
 ### Technical Features
 * **Hardware Power Latching:** The MCU self-latches power via `GPIO_NUM_3` upon wake-up and completely cuts its own power supply once execution is finished.
 * **Smart Service Mode:** Features a dynamic fallback Access Point (AP). If the device detects a predefined "Service" Wi-Fi network from a smartphone, it hosts an internal Web Server, allowing the user to configure settings (Wi-Fi, SMTP credentials, mailbox depth, wake-up intervals) via a web browser without flashing new code.
 * **Battery Monitoring:** Measures battery voltage via ADC to append power status to email notifications.
 
-## Hardware Components
+## Hardware 
 
 * **Microcontroller:** Seeed Studio XIAO ESP32-C3
 * **Distance Sensor:** Adafruit VL53L0X 
 * **Power Management:** M5Stamp Timer Power (+RTC)
 * **Trigger:** Magnetic Reed Switch (Normally Closed)
 * **Power Source:** Li-Pol Battery
+
+### Schematic
+
+![project schematics](schematics/mailbox_schematic.png)
 
 ## Project Structure
 
